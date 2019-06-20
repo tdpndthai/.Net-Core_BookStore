@@ -1,0 +1,55 @@
+﻿@page
+@model IndexModel
+@{
+}
+
+<h2>Books List</h2>
+
+<br />
+
+@if (Model.Messenger != null)
+{
+    <div class="alert alert-info alert-dismissable" >
+        <button type="button" class="close" data-dismiss="alert" aria-label="close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        @Model.Messenger
+    </div>
+}
+
+<a asp-page="Create" class="btn btn-primary">Create new book</a>
+<form method="post">
+    @if (Model.Books.Count() > 0)
+    {
+        <table class="table">
+            <tr>
+                <th>@Html.DisplayNameFor(n => n.Books.FirstOrDefault().Name)</th>
+                <th>@Html.DisplayNameFor(n => n.Books.FirstOrDefault().Author)</th>
+                <th>@Html.DisplayNameFor(n => n.Books.FirstOrDefault().ISBN)</th>
+                <th></th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model.Books)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(n => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(n => item.Author)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(n => item.ISBN)
+                    </td>
+                    <td>
+                        <button asp-page-handler="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Delete</button>
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+    else
+    {
+        <div>No book in database</div>
+    }
+</form>
