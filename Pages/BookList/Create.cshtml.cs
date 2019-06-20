@@ -30,7 +30,7 @@ namespace BookStore.Pages.BookList
 
         public async Task<IActionResult> OnPost()
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 return Page();
             }
